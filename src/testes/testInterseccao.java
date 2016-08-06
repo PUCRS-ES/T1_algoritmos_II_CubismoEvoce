@@ -10,13 +10,12 @@ import codigo.Interseccao;
 import codigo.Retangulo;
 
 public class testInterseccao {
+	Retangulo original = new Retangulo(0, 0, 3, 3);
+	Retangulo corte = new Retangulo(1, 1, 2, 2);
+	Interseccao interserc = new Interseccao();
 	
 	@Test
-	public void testCortaAEsquerda() {
-		Retangulo original = new Retangulo(0, 0, 3, 3);
-		Retangulo corte = new Retangulo(1, 1, 2, 2);
-		Interseccao interserc = new Interseccao();
-		
+	public void testCortaAEsquerda() {		
 		Retangulo retEsquerda = interserc.cortaAEsquerda(original, corte);
 		assertEquals(0, retEsquerda.getX1());
 		assertEquals(0, retEsquerda.getY1());
@@ -31,10 +30,6 @@ public class testInterseccao {
 	
 	@Test
 	public void testCortaADireita() {
-		Retangulo original = new Retangulo(0, 0, 3, 3);
-		Retangulo corte = new Retangulo(1, 1, 2, 2);
-		Interseccao interserc = new Interseccao();
-		
 		Retangulo retDireita = interserc.cortaADireita(original, corte);
 		assertEquals(2, retDireita.getX1());
 		assertEquals(0, retDireita.getY1());
@@ -49,10 +44,6 @@ public class testInterseccao {
 	
 	@Test 
 	public void testCortaEmCima() {
-		Retangulo original = new Retangulo(0, 0, 3, 3);
-		Retangulo corte = new Retangulo(1, 1, 2, 2);
-		Interseccao interserc = new Interseccao();
-		
 		Retangulo retAcima = interserc.cortaAcima(original, corte);
 		assertEquals(1, retAcima.getX1());
 		assertEquals(2, retAcima.getY1());
@@ -67,10 +58,6 @@ public class testInterseccao {
 	
 	@Test 
 	public void testCortaEmBaixo() {
-		Retangulo original = new Retangulo(0, 0, 3, 3);
-		Retangulo corte = new Retangulo(1, 1, 2, 2);
-		Interseccao interserc = new Interseccao();
-		
 		Retangulo retAbaixo = interserc.cortaAbaixo(original, corte);
 		assertEquals(1, retAbaixo.getX1());
 		assertEquals(0, retAbaixo.getY1());
@@ -85,10 +72,6 @@ public class testInterseccao {
 	
 	@Test
 	public void testCortaTodos() {
-		Retangulo original = new Retangulo(0, 0, 3, 3);
-		Retangulo corte = new Retangulo(1, 1, 2, 2);
-		Interseccao interserc = new Interseccao();
-		
 		ArrayList<Retangulo> areaVisivel = interserc.cortaTodos(original, corte);
 		assertEquals(4, areaVisivel.size());
 		
