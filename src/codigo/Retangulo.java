@@ -9,6 +9,8 @@ public class Retangulo {
 		if (x1 == x2 || y1 == y2)
 			isValido = false;
 		
+		//Testar ainda se os valores estao dentro da faixa 0 < x < 32.000
+		
 		X1 = x1;
 		X2 = x2;
 		Y1 = y1;

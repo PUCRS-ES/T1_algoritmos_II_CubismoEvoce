@@ -3,8 +3,6 @@ package codigo;
 import java.util.ArrayList;
 
 public class Interseccao {
-	ArrayList<Retangulo> resultado = new ArrayList<Retangulo>();
-	
 	public Interseccao() {
 		
 	}
@@ -35,5 +33,26 @@ public class Interseccao {
 			return new Retangulo(corte.getX1(), original.getY1(), corte.getX2(), corte.getY1());
 		else
 			return null;
+	}
+
+	public ArrayList<Retangulo> cortaTodos(Retangulo original, Retangulo corte) {
+		//Considerar o uso de um vetor ao inves de ArrayList. O comprimento máximo será 4 sempre
+		ArrayList<Retangulo> areaVisivel = new ArrayList<Retangulo>();
+		
+		Retangulo retEsq = cortaAEsquerda(original, corte);
+		Retangulo retDir = cortaADireita(original, corte);
+		Retangulo retCim = cortaAcima(original, corte);
+		Retangulo retBai = cortaAbaixo(original, corte);
+		
+		if (retEsq != null)
+			areaVisivel.add(retEsq);
+		if (retDir != null)
+			areaVisivel.add(retDir);
+		if (retCim != null)
+			areaVisivel.add(retCim);
+		if (retBai != null)
+			areaVisivel.add(retBai);
+		
+		return areaVisivel;
 	}
 }

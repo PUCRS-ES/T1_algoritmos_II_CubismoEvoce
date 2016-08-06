@@ -2,6 +2,8 @@ package testes;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import codigo.Interseccao;
@@ -39,6 +41,10 @@ public class testInterseccao {
 		assertEquals(3, retDireita.getX2());
 		assertEquals(3, retDireita.getY2());
 		assertEquals(3, retDireita.calculaArea());
+		
+		Retangulo corte2 = new Retangulo(2, 0, 3, 3);
+		Retangulo retSemInterseccao = interserc.cortaADireita(original, corte2);
+		assertEquals(null, retSemInterseccao);
 	}
 	
 	@Test 
@@ -53,6 +59,10 @@ public class testInterseccao {
 		assertEquals(2, retAcima.getX2());
 		assertEquals(3, retAcima.getY2());
 		assertEquals(1, retAcima.calculaArea());
+		
+		Retangulo corte2 = new Retangulo(0, 1, 3, 3);
+		Retangulo retSemInterseccao = interserc.cortaAcima(original, corte2);
+		assertEquals(null, retSemInterseccao);
 	}
 	
 	@Test 
@@ -67,6 +77,25 @@ public class testInterseccao {
 		assertEquals(2, retAbaixo.getX2());
 		assertEquals(1, retAbaixo.getY2());
 		assertEquals(1, retAbaixo.calculaArea());
+		
+		Retangulo corte2 = new Retangulo(0, 0, 3, 3);
+		Retangulo retSemInterseccao = interserc.cortaAbaixo(original, corte2);
+		assertEquals(null, retSemInterseccao);
+	}
+	
+	@Test
+	public void testCortaTodos() {
+		Retangulo original = new Retangulo(0, 0, 3, 3);
+		Retangulo corte = new Retangulo(1, 1, 2, 2);
+		Interseccao interserc = new Interseccao();
+		
+		ArrayList<Retangulo> areaVisivel = interserc.cortaTodos(original, corte);
+		assertEquals(4, areaVisivel.size());
+		
+		int areaTotal = 0;
+		for (Retangulo ret : areaVisivel)
+			areaTotal += ret.calculaArea();
+		assertEquals(8, areaTotal);
 	}
 
 	
