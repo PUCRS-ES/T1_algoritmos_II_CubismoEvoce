@@ -22,15 +22,33 @@ public class Interseccao {
 	}
 
 	public Retangulo cortaAcima(Retangulo original, Retangulo corte) {
-		if (original.getY1() <= corte.getY2() && corte.getY2() < original.getY2())
-			return new Retangulo(corte.getX1(), corte.getY2(), corte.getX2(), original.getY2());
+		if (original.getY1() <= corte.getY2() && corte.getY2() < original.getY2()) {
+			int limiteEsquerdo = corte.getX1();
+			if (limiteEsquerdo < original.getX1())
+				limiteEsquerdo = original.getX1();
+			
+			int limiteDireito = corte.getX2();
+			if (original.getX2() < limiteDireito)
+				limiteDireito = original.getX2();
+			
+			return new Retangulo(limiteEsquerdo, corte.getY2(), limiteDireito, original.getY2());
+		}
 		else
 			return null;
 	}
 
 	public Retangulo cortaAbaixo(Retangulo original, Retangulo corte) {
-		if (original.getY1() < corte.getY1() && corte.getY1() <= original.getY2())
-			return new Retangulo(corte.getX1(), original.getY1(), corte.getX2(), corte.getY1());
+		if (original.getY1() < corte.getY1() && corte.getY1() <= original.getY2()) {
+			int limiteEsquerdo = corte.getX1();
+			if (limiteEsquerdo < original.getX1())
+				limiteEsquerdo = original.getX1();
+			
+			int limiteDireito = corte.getX2();
+			if (original.getX2() < limiteDireito)
+				limiteDireito = original.getX2();
+			
+			return new Retangulo(limiteEsquerdo, original.getY1(), limiteDireito, corte.getY1());
+		}
 		else
 			return null;
 	}

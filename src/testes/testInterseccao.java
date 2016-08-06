@@ -14,6 +14,12 @@ public class testInterseccao {
 	Retangulo corte = new Retangulo(1, 1, 2, 2);
 	Interseccao interserc = new Interseccao();
 	
+	Retangulo retanguloPrincipalExercicio = new Retangulo(5, 3, 12, 10);
+	Retangulo retangulo1Exercicio = new Retangulo(1, 7, 8, 14);
+	Retangulo retangulo2Exercicio = new Retangulo(7, 5, 11, 13);
+	Retangulo retangulo3Exercicio = new Retangulo(10, 7, 17, 14);
+	Retangulo retangulo4Exercicio = new Retangulo(9, 1, 17, 6);
+	
 	@Test
 	public void testCortaAEsquerda() {		
 		Retangulo retEsquerda = interserc.cortaAEsquerda(original, corte);
@@ -54,6 +60,12 @@ public class testInterseccao {
 		Retangulo corte2 = new Retangulo(0, 1, 3, 3);
 		Retangulo retSemInterseccao = interserc.cortaAcima(original, corte2);
 		assertEquals(null, retSemInterseccao);
+		
+		Retangulo novoTeste = interserc.cortaAcima(retanguloPrincipalExercicio, retangulo4Exercicio);
+		assertEquals(9, novoTeste.getX1());
+		assertEquals(12, novoTeste.getX2());
+		assertEquals(6, novoTeste.getY1());
+		assertEquals(10, novoTeste.getY2());
 	}
 	
 	@Test 
@@ -68,6 +80,12 @@ public class testInterseccao {
 		Retangulo corte2 = new Retangulo(0, 0, 3, 3);
 		Retangulo retSemInterseccao = interserc.cortaAbaixo(original, corte2);
 		assertEquals(null, retSemInterseccao);
+		
+		Retangulo novoTeste = interserc.cortaAbaixo(retanguloPrincipalExercicio, retangulo1Exercicio);
+		assertEquals(5, novoTeste.getX1());
+		assertEquals(8, novoTeste.getX2());
+		assertEquals(3, novoTeste.getY1());
+		assertEquals(7, novoTeste.getY2());
 	}
 	
 	@Test
