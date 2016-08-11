@@ -42,14 +42,14 @@ public class Interseccao {
 			lista.add(meio);
 			lista.add(topo);
 		}
-		else if(original.getY2() > corte.getY2() && original.getY1() >= corte.getY1()) { //retangulo ocupa a linha de cima e a do meio
+		else if(original.getY2() > corte.getY2() && corte.getY2() > original.getY1()) { //retangulo ocupa a linha de cima e a do meio
 			Retangulo topo = new Retangulo(original.getX1(), corte.getY2(), original.getX2(), original.getY2());
 			Retangulo meio = new Retangulo(original.getX1(), original.getY1(), original.getX2(), corte.getY2());
 			lista.add(null);
 			lista.add(meio);
 			lista.add(topo);
 		}
-		else if(original.getY1() < corte.getY1() && original.getY2() <= corte.getY2()) { //retangulo ocupa a linha do meio, e a de baixo
+		else if(original.getY1() < corte.getY1() && corte.getY1() < original.getY2()) { //retangulo ocupa a linha do meio, e a de baixo
 			Retangulo meio = new Retangulo(original.getX1(), corte.getY1(), original.getX2(), original.getY2());
 			Retangulo baixo = new Retangulo(original.getX1(), original.getY1(), original.getX2(), corte.getY1());
 			lista.add(baixo);
@@ -94,14 +94,14 @@ public class Interseccao {
 			lista.add(centro);
 			lista.add(direita);
 		}
-		else if (original.getX1() < corte.getX1() && original.getX2() <= corte.getX2()) { //retangulo ocupa a coluna do meio e da esquerda
+		else if (original.getX1() < corte.getX1() && corte.getX1() < original.getX2()) { //retangulo ocupa a coluna do meio e da esquerda
 			Retangulo esquerda = new Retangulo(original.getX1(), original.getY1(), corte.getX1(), original.getY2());
 			Retangulo centro = new Retangulo(corte.getX1(), original.getY1(), original.getX2(), original.getY2());
 			lista.add(esquerda);
 			lista.add(centro);
 			lista.add(null);
 		}
-		else if (corte.getX1() <= original.getX1() && corte.getX2() < original.getX2()) { //retangulo ocupa a coluna do meio e da direita
+		else if (original.getX1() < corte.getX2() && corte.getX2() < original.getX2()) { //retangulo ocupa a coluna do meio e da direita
 			Retangulo centro = new Retangulo(original.getX1(), original.getY1(), corte.getX2(), original.getY2());
 			Retangulo direita = new Retangulo(corte.getX2(), original.getY1(), original.getX2(), original.getY2());
 			lista.add(null);
