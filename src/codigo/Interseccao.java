@@ -30,7 +30,7 @@ public class Interseccao {
 			return false;
 	}
 	
-	public ArrayList<Retangulo> cortaEmPartesVerticais(Retangulo original, Retangulo corte) {
+	public ArrayList<Retangulo> cortaHorizontalmente(Retangulo original, Retangulo corte) {
 		
 		ArrayList<Retangulo> lista = new ArrayList<Retangulo>();
 		
@@ -38,27 +38,51 @@ public class Interseccao {
 			Retangulo topo = new Retangulo(original.getX1(), corte.getY2(), original.getX2(), original.getY2());
 			Retangulo meio = new Retangulo(original.getX1(), corte.getY1(), original.getX2(), corte.getY2());
 			Retangulo baixo = new Retangulo(original.getX1(), original.getY1(), original.getX2(), corte.getY1());
-			lista.add(topo);
-			lista.add(meio);
 			lista.add(baixo);
+			lista.add(meio);
+			lista.add(topo);
 		}
 		else if(original.getY2() > corte.getY2() && original.getY1() >= corte.getY1()) { //retangulo ocupa a linha de cima e a do meio
 			Retangulo topo = new Retangulo(original.getX1(), corte.getY2(), original.getX2(), original.getY2());
 			Retangulo meio = new Retangulo(original.getX1(), original.getY1(), original.getX2(), corte.getY2());
-			lista.add(topo);
+			lista.add(null);
 			lista.add(meio);
+			lista.add(topo);
 		}
-		else { //retangulo ocupa a linha do meio, e a de baixo
+		else if(original.getY1() < corte.getY1() && original.getY2() <= corte.getY2()) { //retangulo ocupa a linha do meio, e a de baixo
 			Retangulo meio = new Retangulo(original.getX1(), corte.getY1(), original.getX2(), original.getY2());
 			Retangulo baixo = new Retangulo(original.getX1(), original.getY1(), original.getX2(), corte.getY1());
-			lista.add(meio);
 			lista.add(baixo);
+			lista.add(meio);
+			lista.add(null);
+		}
+		else { //retangulo esta contido em apenas uma linha
+			Retangulo ret = new Retangulo(original.getX1(), original.getY1(), original.getX2(), original.getY2());
+			
+			//essa linha é a do topo
+			if (original.getY1() >= corte.getY2() && original.getY2() > corte.getY2()) {
+				lista.add(null);
+				lista.add(null);
+				lista.add(ret);
+			}
+			//essa linha é a do centro
+			else if (original.getY2() <= corte.getY2() && original.getY1() >= corte.getY1()) {
+				lista.add(null);
+				lista.add(ret);
+				lista.add(null);
+			}
+			//essa linha é a de baixo
+			else {
+				lista.add(ret);
+				lista.add(null);
+				lista.add(null);
+			}
 		}
 		
 		return lista;
 	}
 	
-	public ArrayList<Retangulo> cortaEmPartesHorizontais(Retangulo original, Retangulo corte) {
+	public ArrayList<Retangulo> cortaVerticalmente(Retangulo original, Retangulo corte) {
 		
 		ArrayList<Retangulo> lista = new ArrayList<Retangulo>();
 		
@@ -75,16 +99,46 @@ public class Interseccao {
 			Retangulo centro = new Retangulo(corte.getX1(), original.getY1(), original.getX2(), original.getY2());
 			lista.add(esquerda);
 			lista.add(centro);
+			lista.add(null);
 		}
-		else { //retangulo ocupa a coluna do meio e da direita
+		else if (corte.getX1() <= original.getX1() && corte.getX2() < original.getX2()) { //retangulo ocupa a coluna do meio e da direita
 			Retangulo centro = new Retangulo(original.getX1(), original.getY1(), corte.getX2(), original.getY2());
 			Retangulo direita = new Retangulo(corte.getX2(), original.getY1(), original.getX2(), original.getY2());
+			lista.add(null);
 			lista.add(centro);
 			lista.add(direita);
+		}
+		//retangulo esta contido em apenas uma coluna
+		else {
+			Retangulo ret = new Retangulo(original.getX1(), original.getY1(), original.getX2(), original.getY2());
+			
+			//essa coluna é a da direita
+			if (original.getX1() >= corte.getX2() && original.getX2() > corte.getX2()) {
+				lista.add(null);
+				lista.add(null);
+				lista.add(ret);
+			}
+			//essa colunas é a do centro
+			else if (original.getX2() <= corte.getX2() && original.getX1() >= corte.getX1()) {
+				lista.add(null);
+				lista.add(ret);
+				lista.add(null);
+			}
+			//essa linha é a da esquerda
+			else {
+				lista.add(ret);
+				lista.add(null);
+				lista.add(null);
+			}
 		}
 		
 		return lista;
 	}
+	
+	
+	
+	//Nao usar esses metodos aqui pra baixo!
+	
 	
 	
 	public Retangulo cortaAEsquerda(Retangulo original, Retangulo corte) {

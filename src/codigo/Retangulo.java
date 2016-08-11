@@ -18,7 +18,9 @@ public class Retangulo {
 	}
 	
 	public int calculaArea() {
-		return (X2 - X1) * (Y2 - Y1);
+		int valor = (X2 - X1) * (Y2 - Y1);
+		valor = valor;
+		return (X2 - X1) *  (Y2 - Y1);
 	}
 
 	public boolean isXInvertido() {
