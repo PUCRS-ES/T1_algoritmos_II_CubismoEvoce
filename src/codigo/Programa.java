@@ -1,41 +1,42 @@
 package codigo;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Programa {
 
 	public static void main(String[] args) {
 		try {
-			Leitor leitor = new Leitor("c50000");
-			String linha = leitor.leProximaLinha();
-			String[] dados = linha.split(" ");
+			Instant start = Instant.now();
+			
+			Scanner leitor = new Scanner(new File("c35000"));
 			Retangulo original = new Retangulo(
-				Integer.parseInt(dados[0]),
-				Integer.parseInt(dados[1]),
-				Integer.parseInt(dados[2]),
-				Integer.parseInt(dados[3])
+				leitor.nextInt(),
+				leitor.nextInt(),
+				leitor.nextInt(),
+				leitor.nextInt()
 			);
 			Deque<Retangulo> filaCircular = new LinkedList<Retangulo>();
 			filaCircular.add(original);
 			Interseccao interserc = new Interseccao();
 			int area = 0;
 			
-			linha = leitor.leProximaLinha();
-			int quantidadeDeRetangulos = Integer.parseInt(linha);
+			int quantidadeDeRetangulos = leitor.nextInt();
 			
 			int atual = 0;
 			while (atual < quantidadeDeRetangulos) {
-				linha = leitor.leProximaLinha();
-				dados = linha.split(" ");
 				Retangulo corteAtual = new Retangulo(
-					Integer.parseInt(dados[0]),
-					Integer.parseInt(dados[1]),
-					Integer.parseInt(dados[2]),
-					Integer.parseInt(dados[3])
+					leitor.nextInt(),
+					leitor.nextInt(),
+					leitor.nextInt(),
+					leitor.nextInt()
 				);
 
 				int tamanho = filaCircular.size();
@@ -69,17 +70,14 @@ public class Programa {
 					}
 				}
 				
-				area = 0;
-				for (Retangulo aux : filaCircular)
-					area += aux.calculaArea();
-//				try {
-//					Thread.sleep(1000);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
 				atual++;
-				System.out.println("Retangulo atual: " + atual + " - Área: " + area);
 			}
+			
+			area = 0;
+			for (Retangulo aux : filaCircular)
+				area += aux.calculaArea();
+			Instant end = Instant.now();
+			System.out.println("Área: " + area + " - " + Duration.between(start, end));
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
