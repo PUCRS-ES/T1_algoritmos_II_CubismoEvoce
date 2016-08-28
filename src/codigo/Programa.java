@@ -14,70 +14,109 @@ public class Programa {
 
 	public static void main(String[] args) {
 		try {
-			Instant start = Instant.now();
+			long count = 0;
 			
-			Scanner leitor = new Scanner(new File("c35000"));
+			count++;
+			Scanner leitor = new Scanner(new File("c10000"));
+			
+			count++;
 			Retangulo original = new Retangulo(
-				leitor.nextInt(),
-				leitor.nextInt(),
-				leitor.nextInt(),
-				leitor.nextInt()
+				leitor.nextShort(),
+				leitor.nextShort(),
+				leitor.nextShort(),
+				leitor.nextShort(),
+				count
 			);
+			
+			count++;
 			Deque<Retangulo> filaCircular = new LinkedList<Retangulo>();
+			count++;
 			filaCircular.add(original);
+			count++;
 			Interseccao interserc = new Interseccao();
+			count++;
 			int area = 0;
 			
+			count++;
 			int quantidadeDeRetangulos = leitor.nextInt();
 			
+			count++;
 			int atual = 0;
 			while (atual < quantidadeDeRetangulos) {
+				count++;
 				Retangulo corteAtual = new Retangulo(
-					leitor.nextInt(),
-					leitor.nextInt(),
-					leitor.nextInt(),
-					leitor.nextInt()
+					leitor.nextShort(),
+					leitor.nextShort(),
+					leitor.nextShort(),
+					leitor.nextShort(),
+					count
 				);
 
+				count++;
 				int tamanho = filaCircular.size();
 				for (int i = 0; i < tamanho; i++) {
+					count++;
+					
+					count++;
 					Retangulo ret = filaCircular.removeFirst();
 					
-					if (interserc.estaNasQuinas(ret, corteAtual) == true)
+					if (interserc.estaNasQuinas(ret, corteAtual) == true) {
+						count++;
 						filaCircular.add(ret);
+					}
 					else {
-						ArrayList<Retangulo> horizontal = interserc.cortaHorizontalmente(ret, corteAtual);
+						count++;
+						ArrayList<Retangulo> horizontal = interserc.cortaHorizontalmente(ret, corteAtual, count);
+						count++;
 						Retangulo baixo = horizontal.get(0);
+						count++;
 						Retangulo meio = horizontal.get(1);
+						count++;
 						Retangulo topo = horizontal.get(2);
 						
-						if (baixo != null)
+						if (baixo != null) {
+							count++;
 							filaCircular.add(baixo);
-						if (topo != null)
+						}
+						if (topo != null) {
+							count++;
 							filaCircular.add(topo);
+						}
 						
 						if (meio != null) {
-							ArrayList<Retangulo> vertical = interserc.cortaVerticalmente(meio, corteAtual);
+							count++;
+							ArrayList<Retangulo> vertical = interserc.cortaVerticalmente(meio, corteAtual, count);
+							count++;
 							Retangulo esquerda = vertical.get(0);
+							count++;
 							Retangulo centro = vertical.get(1);
+							count++;
 							Retangulo direita = vertical.get(2);
 							
-							if (esquerda != null)
+							if (esquerda != null) {
+								count++;
 								filaCircular.add(esquerda);
-							if (direita != null)
+							}
+							if (direita != null) {
+								count++;
 								filaCircular.add(direita);
+							}
 						}
 					}
 				}
 				
+				count++;
 				atual++;
 			}
 			
+			count++;
 			area = 0;
-			for (Retangulo aux : filaCircular)
+			for (Retangulo aux : filaCircular) {
+				count++;
 				area += aux.calculaArea();
-			Instant end = Instant.now();
-			System.out.println("Área: " + area + " - " + Duration.between(start, end));
+			}
+			count++;
+			System.out.println("Área: " + area + " - Operacoes: " + count);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
